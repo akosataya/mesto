@@ -77,6 +77,19 @@
     <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia &amp;&nbsp;Анастасия Косатая</p>
     </footer>
-    
+    <div class="popup popup_opened" id="popup">
+        <div class="popup__container">
+            <button class="popup__close-button" id="popup__close" type="button"></button>
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <form class="popup__form" id="popup__form" action="#" name="edit-form">
+                <fieldset class="popup__fieldset">
+                    <input class="popup__input" id="popup__name-input"  placeholder="Имя">
+                    <input class="popup__input" id="popup__job-input"  placeholder="О себе">
+                    <button class="popup__save" id="popup__save-button" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
