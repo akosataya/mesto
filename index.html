@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Анастасия Косатая">
     <meta name="description" content="?">
-    <title>Mesto</title>
+    <title>Место</title>
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
@@ -19,56 +19,56 @@
                 <img src="./images/profile-image.png" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
                 <div class="profile__text">
                     <div class="profile__info">
-                        <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button" aria-label="Редактировать" id="profile__edit-button"></button>
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
                     </div>
-                    <p class="profile__about" id="profile__about">Исследователь океана</p>
+                    <p class="profile__about">Исследователь океана</p>
                 </div>
             </div>
-            <button class="profile__add-button" type="button" aria-label="Добавить"></button>
+            <button class="profile__add-button" type="button" aria-label="Добавить" aria-label="Добавить"></button>
         </section>
         <section class="gallery" aria-label="Секция с фотографиями">
-            <ul class="gallery__photos" id="gallery__photos">
+            <ul class="gallery__photos">
                 <li class="gallery__photos-item">
                     <img src="./images/kozelsky-volcano.jpg" alt="Козельский вулкан на Камчатке" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Козельский вулкан</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="gallery__photos-item">
                     <img src="./images/teriberka.jpg" alt="Териберка, Мурманская область" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Териберка</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="gallery__photos-item">
                     <img src="./images/karelia.jpg" alt="Фото озера и скал в Карелии" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Карелия</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="gallery__photos-item">
                     <img src="./images/baikal.jpg" alt="Ледник на замёрзшем озере Байкал" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Байкал</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="gallery__photos-item">
                     <img src="./images/sulak-canyon.jpg" alt="Сулакский каньон в Дагестане" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Сулакский каньон</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="gallery__photos-item">
                     <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
                         <h2 class="gallery__title">Эльбрус</h2>
-                        <button class="gallery__like-button" type="button"></button>
+                        <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
             </ul>
@@ -77,16 +77,14 @@
     <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia &amp;&nbsp;Анастасия Косатая</p>
     </footer>
-    <div class="popup" id="popup">
+    <div class="popup">
         <div class="popup__container">
-            <button class="popup__close-button" id="popup__close-button" type="button"></button>
+            <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <form class="popup__form" id="popup__form" action="#" name="edit-form">
-                <fieldset class="popup__fieldset">
-                    <input class="popup__input" id="popup__name-input"  placeholder="Имя">
-                    <input class="popup__input" id="popup__job-input"  placeholder="О себе">
-                    <button class="popup__save" type="submit">Сохранить</button>
-                </fieldset>
+            <form class="popup__form" action="#" name="edit-form">
+                <input class="popup__input popup__input_name" placeholder="Имя" name="name" required>
+                <input class="popup__input popup__input_about" placeholder="О себе" name="about" required>
+                <button class="popup__save" type="submit">Сохранить</button>
             </form>
         </div>
     </div>

@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(3, 6fr);
     row-gap: 20px;
-    column-gap: 20px;
+    column-gap: 17px;
     justify-content: center;
     width: 100%;
 }
@@ -13,6 +13,6 @@
 @media screen and (max-width: 1279px) {
     .gallery__photos {
         grid-template-columns: repeat(1, 6fr);
-        row-gap: 17px;
+        row-gap: 20px;
     }
 }
