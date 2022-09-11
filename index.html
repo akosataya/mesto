@@ -19,10 +19,10 @@
                 <img src="./images/profile-image.png" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
                 <div class="profile__text">
                     <div class="profile__info">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
+                        <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button" aria-label="Редактировать" id="profile__edit-button"></button>
                     </div>
-                    <p class="profile__about">Исследователь океана</p>
+                    <p class="profile__about" id="profile__about">Исследователь океана</p>
                 </div>
             </div>
             <button class="profile__add-button" type="button" aria-label="Добавить"></button>
@@ -79,7 +79,7 @@
     </footer>
     <div class="popup" id="popup">
         <div class="popup__container">
-            <button class="popup__close-button" id="popup__close" type="button"></button>
+            <button class="popup__close-button" id="popup__close-button" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" id="popup__form" action="#" name="edit-form">
                 <fieldset class="popup__fieldset">
