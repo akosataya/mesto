@@ -28,7 +28,7 @@
             <button class="profile__add-button" type="button" aria-label="Добавить"></button>
         </section>
         <section class="gallery" aria-label="Секция с фотографиями">
-            <ul class="gallery__photos">
+            <!-- <ul class="gallery__photos">
                 <li class="gallery__photos-item">
                     <img src="./images/kozelsky-volcano.jpg" alt="Козельский вулкан на Камчатке" class="gallery__photo" loading="lazy">
                     <div class="gallery__description">
@@ -71,7 +71,7 @@
                         <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
                     </div>
                 </li>
-            </ul>
+            </ul> -->
         </section>
     </main>
     <footer class="footer">
@@ -86,6 +86,36 @@
                 <input class="popup__input popup__input_type_about" placeholder="О себе" name="about" required>
                 <button class="popup__save" type="submit">Сохранить</button>
             </form>
+        </div>
+    </div>
+    <div class="popup">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+            <h3 class="popup__title">Новое место</h3>
+            <form class="popup__form" action="#" name="edit-form">
+                <input class="popup__input popup__input_type_name" placeholder="Название" name="name" required>
+                <input class="popup__input popup__input_type_about" placeholder="Ссылка на картинку" name="link" required>
+                <button class="popup__save" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <template class="initialCards-template">
+        <li class="gallery__photos-item">
+            <img src="#" class="gallery__photo" alt>
+            <div class="gallery__description">
+            <h2 class="gallery__title"></h2>
+            <button class="gallery__like-button" type="button"></button>
+            </div>
+            <button class="gallery__delete-button" type="button"></button>
+        </li>
+    </template>
+    <div class="popup popup_place_photo">
+        <div class="popup__photo-container">
+            <button class="popup__close-button" id="popup__close-photo" type="button"></button>
+            <figure class="popup__photo-item">
+                <img class="popup__photo" src="#" alt>
+                <figcaption class="popup__photo-caption"></figcaption>
+            </figure>
         </div>
     </div>
     <script src="./scripts/index.js"></script>
