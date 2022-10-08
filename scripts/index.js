@@ -160,6 +160,3 @@ gallery.addEventListener('click', (e) => {
 
 
 
-
-
-
