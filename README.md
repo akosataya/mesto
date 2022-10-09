@@ -8,4 +8,4 @@
 * Figma
 * Flex-box и Grid layout
 * Адаптивная вёрстка (для двух разрешений: 1280px и 320px)
-* Открытие модульного окна popup при помощи JavaScript
+* Ванильный JavaScript
