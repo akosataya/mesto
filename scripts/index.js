@@ -28,7 +28,7 @@ const initialCards = [
 ];
 
 const popupEdit = document.querySelector('.popup_edit');
-const formElementEdit = document.querySelector('.popup__edit_form');
+const formElementEdit = document.querySelector('.popup__edit-form');
 const nameInput = document.querySelector('.popup__input_edit_name');
 const jobInput = document.querySelector('.popup__input_edit_about');
 const profileName = document.querySelector('.profile__name');
