@@ -39,7 +39,14 @@ const closeEditBtn = document.querySelector('.popup__close-edit');
 const gallery = document.querySelector('.gallery__photos');
 const modalAddBtn = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('.popup_add');
-const popupForm = document.querySelector('.popup__add-form');
+const popupAddForm = document.querySelector('.popup__add-form');
+
+const popupArea = document.querySelector('.popup_place_photo');
+const popupPhoto = popupArea.querySelector('.popup__photo');
+const popupCaption = popupArea.querySelector('.popup__photo-caption');
+
+
+
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
@@ -49,6 +56,7 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
+// ==============Работа с edit модальным окном
 function openEditPopup() {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
@@ -59,8 +67,9 @@ function closeEditPopup() {
     closePopup(popupEdit);
 }
 
-function formSubmitProfile(evt) {
-    evt.preventDefault();
+
+function formSubmitProfile(e) {
+    e.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
     closePopup(popupEdit);
@@ -70,7 +79,7 @@ editBtn.addEventListener('click', openEditPopup);
 closeEditBtn.addEventListener('click', closeEditPopup);
 formElementEdit.addEventListener('submit', formSubmitProfile);
 
-
+// ==============Создание карточек
 function createItem(parent, elemTag, name, link) {
     const item = document.createElement(elemTag);
     item.classList.add('gallery__item');
@@ -83,10 +92,7 @@ function createItem(parent, elemTag, name, link) {
     parent.prepend(item);
 }
 
-function closeModal(modalClass) {
-    popupAdd.classList.remove(modalClass);
-}
-
+// ==============Добавление функций лайков и мусорки
 function addLike(item) {
     if(item.style.backgroundImage){
         item.style.backgroundImage = "";
@@ -106,26 +112,26 @@ for(let i = 0; i < initialCards.length; i++){
     createItem(gallery, 'li', name, link);
 }
 
-// ==============Работа с модальным окном
+// ==============Работа с add модальным окном
 modalAddBtn.addEventListener('click', (e) => {
-    popupAdd.classList.add('popup_opened');
+    openPopup(popupAdd);
 });
 
 popupAdd.addEventListener('click', (e) => {
     if(e.target && e.target.matches('.popup_add') || e.target.matches('.popup__close-add')){
-        closeModal('popup_opened');
+        closePopup(popupAdd);
     }
 });
 
-// ==============Работа с form
-popupForm.addEventListener('submit', (e) => {
+// ==============Работа с add form
+popupAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = popupForm.querySelector('.popup__input_add_name');
-    const link = popupForm.querySelector('.popup__input_add_link');
+    const name = popupAddForm.querySelector('.popup__input_add_name');
+    const link = popupAddForm.querySelector('.popup__input_add_link');
 
     createItem(gallery, 'li', name.value, link.value);
-    closeModal('popup_opened');
+    closePopup(popupAdd);
 
     name.value = '';
     link.value = '';
@@ -155,8 +161,27 @@ gallery.addEventListener('click', (e) => {
     }
 })
 
+// ==============Открытие фото по её нажатию
+gallery.addEventListener('click', (e) => {
+    let photoItems = document.querySelectorAll('.gallery__photo');
+    if(e.target && e.target.matches('.gallery__photo')){
+        photoItems.forEach(item => {
+            if(e.target ===item){
+                openPhoto(item)
+            }
+        });
+    }
+});
 
+function openPhoto(item) {
+    popupPhoto.src = item.src;
+    popupPhoto.alt = item.alt;
+    popupCaption.textContent = item.alt;
+    openPopup(popupArea);
+}
 
-
-
-
+popupArea.addEventListener('click', (e) => {
+    if(e.target && e.target.matches('.popup_place_photo') || e.target.matches('.popup__close-button')) {
+        closePopup(popupArea);
+    }
+});

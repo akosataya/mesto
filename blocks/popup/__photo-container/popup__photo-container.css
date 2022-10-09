@@ -4,11 +4,7 @@
     flex-direction: column;
     margin: 0 auto;
     padding: 0;
-    max-width: 75vw;
-    max-height: 75vh;
+    max-width: 1280px;
+    width: fit-content;
+    align-self: center;
 }
-/* 
-width: auto;
-background: none;
-box-shadow: none;
-border-radius: 0; */
