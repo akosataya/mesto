@@ -1,5 +1,7 @@
 'use strict';
 
+const popupList = document.querySelectorAll('.popup');
+
 const popupEdit = document.querySelector('.popup_edit');
 const formElementEdit = document.querySelector('.popup__edit-form');
 const nameInput = document.querySelector('.popup__input_edit_name');
@@ -14,16 +16,18 @@ const popupAdd = document.querySelector('.popup_add');
 const popupAddForm = document.querySelector('.popup__add-form');
 const nameAddInput = popupAddForm.querySelector('.popup__input_add_name');
 const linkAddInput = popupAddForm.querySelector('.popup__input_add_link');
+const closeAddBtn = document.querySelector('.popup__close-add');
 
 const photoCardsContainer = document.querySelector('.gallery');
-const photoCardTemplate = document.querySelector('.gallery__photos').content;
+const photoCardsTemplate = document.querySelector('.gallery__photos').content;
 
 const popupArea = document.querySelector('.popup_place-photo');
 const popupPhoto = popupArea.querySelector('.popup__photo');
 const popupCaption = popupArea.querySelector('.popup__photo-caption');
+const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
 
-
+// ==============Открытие и закрытие попапов
 function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
@@ -32,15 +36,19 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
+popupList.forEach(popup => {
+    popup.addEventListener('click', (e) => {
+        if(e.target && e.target.matches('.popup_opened') || e.target.matches('.popup__close-button')) {
+            closePopup(popup);
+        }
+    });
+})
+
 // ==============Работа с edit модальным окном
 function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
     openPopup(popupEdit);
-}
-
-function closeEditPopup() {
-    closePopup(popupEdit);
 }
 
 function handleProfileFormSubmit(e) {
@@ -51,12 +59,11 @@ function handleProfileFormSubmit(e) {
 }
 
 editBtn.addEventListener('click', openEditPopup);
-closeEditBtn.addEventListener('click', closeEditPopup);
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
 // ==============Создание карточек
 function createCard(card) {
-    const photoCardElement = photoCardTemplate.cloneNode(true);
+    const photoCardElement = photoCardsTemplate.cloneNode(true);
     const photoPopup = photoCardElement.querySelector('.gallery__photo');
 
     photoPopup.src = card.link;
@@ -72,7 +79,7 @@ function createCard(card) {
 initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
 });
 
-// ==============Делегирование событий, для работы с лайками и удалением карточек
+// ==============Делегирование событий, для работы с лайками, удалением карточек и открытием фотографий
 function setListeneresOnPhotoCard(element) {
     const deleteBtn = element.querySelector('.gallery__delete-button');
     deleteBtn.addEventListener('click', deleteCard);
@@ -94,32 +101,14 @@ function handleLikeCard(e) {
 }
 
 // ==============Открытие фото по её нажатию
-function openPhoto(e, name) {
+function openPhoto(e) {
     popupPhoto.src = e.target.src;
     popupPhoto.alt = e.target.alt;
     popupCaption.textContent = e.target.alt;
     openPopup(popupArea);
 }
 
-popupArea.addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.popup_place-photo') || e.target.matches('.popup__close-button')) {
-        closePopup(popupArea);
-    }
-});
-
-
-// ==============Работа с add модальным окном
-modalAddBtn.addEventListener('click', (e) => {
-    openPopup(popupAdd);
-});
-
-popupAdd.addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.popup_add') || e.target.matches('.popup__close-add')){
-        closePopup(popupAdd);
-    }
-});
-
-// ==============Работа с add form
+// ==============Работа с add -form и -модальным окном
 popupAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -131,5 +120,22 @@ popupAddForm.addEventListener('submit', (e) => {
     photoCardsContainer.prepend(createCard(addFormValue));
     e.target.reset();
 
+    closePopup(popupAdd);
+});
+
+modalAddBtn.addEventListener('click', (e) => {
+    openPopup(popupAdd);
+});
+
+// ==============Закрытие попапов
+closeEditBtn.addEventListener('click', e => {
+    closePopup(popupEdit);
+});
+
+closePhotoBtn.addEventListener('click', e => {
+    closePopup(popupArea);
+});
+
+closeAddBtn.addEventListener('click', e => {
     closePopup(popupAdd);
 });
