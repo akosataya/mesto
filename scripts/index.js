@@ -70,7 +70,7 @@ function createCard(card) {
     photoPopup.alt = card.name;
     photoCardElement.querySelector('.gallery__title').textContent = card.name;
 
-    setListeneresOnPhotoCard(photoCardElement);
+    setListenersOnPhotoCard(photoCardElement);
 
     return photoCardElement;
 }
@@ -80,7 +80,7 @@ initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element)
 });
 
 // ==============Делегирование событий, для работы с лайками, удалением карточек и открытием фотографий
-function setListeneresOnPhotoCard(element) {
+function setListenersOnPhotoCard(element) {
     const deleteBtn = element.querySelector('.gallery__delete-button');
     deleteBtn.addEventListener('click', deleteCard);
 
