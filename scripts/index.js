@@ -40,11 +40,15 @@ const gallery = document.querySelector('.gallery__photos');
 const modalAddBtn = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('.popup_add');
 const popupAddForm = document.querySelector('.popup__add-form');
+const name = popupAddForm.querySelector('.popup__input_add_name');
+const link = popupAddForm.querySelector('.popup__input_add_link');
 
-const popupArea = document.querySelector('.popup_place_photo');
+const photoCardsContainer = document.querySelector('.gallery');
+const photoCardTemplate = document.querySelector('.gallery__photos').content;
+
+const popupArea = document.querySelector('.popup_place-photo');
 const popupPhoto = popupArea.querySelector('.popup__photo');
 const popupCaption = popupArea.querySelector('.popup__photo-caption');
-
 
 
 
@@ -58,9 +62,9 @@ function closePopup(popup) {
 
 // ==============Работа с edit модальным окном
 function openEditPopup() {
-    openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
+    openPopup(popupEdit);
 }
 
 function closeEditPopup() {
@@ -68,7 +72,7 @@ function closeEditPopup() {
 }
 
 
-function formSubmitProfile(e) {
+function handleProfileFormSubmit(e) {
     e.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
@@ -77,40 +81,61 @@ function formSubmitProfile(e) {
 
 editBtn.addEventListener('click', openEditPopup);
 closeEditBtn.addEventListener('click', closeEditPopup);
-formElementEdit.addEventListener('submit', formSubmitProfile);
+formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
 // ==============Создание карточек
-function createItem(parent, elemTag, name, link) {
-    const item = document.createElement(elemTag);
-    item.classList.add('gallery__item');
-    item.innerHTML = `<img src="${link}" alt="${name}" class="gallery__photo" loading="lazy">
-                        <div class="gallery__description">
-                            <h2 class="gallery__title">${name}</h2>
-                            <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-                            <button class="gallery__delete-button" type="button" aria-label="Мусорка"></button>
-                        </div>`;
-    parent.prepend(item);
-}
+function createCard(card) {
+    const photoCardElement = photoCardTemplate.cloneNode(true);
+    const photoPopup = photoCardElement.querySelector('.gallery__photo');
 
-// ==============Добавление функций лайков и мусорки
-function addLike(item) {
-    if(item.style.backgroundImage){
-        item.style.backgroundImage = "";
-        return;
-    }
-    item.style.backgroundImage = "url(./images/like-button_active.svg)";
-}
+    photoPopup.src = card.link;
+    photoPopup.alt = card.name;
+    photoCardElement.querySelector('.gallery__title').textContent = card.name;
 
-function deleteCard(item) {
-    item.parentNode.parentNode.remove();
+    setListeneresOnPhotoCard(photoCardElement);
+
+    return photoCardElement;
 }
 
 // ==============Создание карточек из базы
+initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
+});
 
-for(let i = 0; i < initialCards.length; i++){
-    const {name, link} = initialCards[i];
-    createItem(gallery, 'li', name, link);
+// ==============Делегирование событий, для работы с лайками и удалением карточек
+function setListeneresOnPhotoCard(element) {
+    const deleteBtn = element.querySelector('.gallery__delete-button');
+    deleteBtn.addEventListener('click', deleteCard);
+
+    const likeBtn = element.querySelector('.gallery__like-button');
+    likeBtn.addEventListener('click', handleLikeCard);
+
+    element.querySelector('.gallery__photo').addEventListener('click', openPhoto);
 }
+
+// ==============Добавление функций лайков и мусорки
+function deleteCard(e) {
+    const trashItem = e.target.closest('.gallery__item');
+    trashItem.remove();
+}
+
+function handleLikeCard(e) {
+    e.target.classList.toggle('gallery__like-button_active');
+}
+
+// ==============Открытие фото по её нажатию
+function openPhoto(e, name) {
+    popupPhoto.src = e.target.src;
+    popupPhoto.alt = e.target.alt;
+    popupCaption.textContent = e.target.alt;
+    openPopup(popupArea);
+}
+
+popupArea.addEventListener('click', (e) => {
+    if(e.target && e.target.matches('.popup_place-photo') || e.target.matches('.popup__close-button')) {
+        closePopup(popupArea);
+    }
+});
+
 
 // ==============Работа с add модальным окном
 modalAddBtn.addEventListener('click', (e) => {
@@ -127,61 +152,13 @@ popupAdd.addEventListener('click', (e) => {
 popupAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = popupAddForm.querySelector('.popup__input_add_name');
-    const link = popupAddForm.querySelector('.popup__input_add_link');
-
-    createItem(gallery, 'li', name.value, link.value);
+    createCard(gallery, 'li', name.value, link.value);
     closePopup(popupAdd);
 
     name.value = '';
     link.value = '';
 });
 
-// ==============Делегирование событий, для работы с лайками и удалением карточек
 
-gallery.addEventListener('click', (e) => {
-    let likeBtn = document.querySelectorAll('.gallery__like-button');
-    if(e.target && e.target.parentNode.parentNode.matches('.gallery__item')){
-        likeBtn.forEach(item => {
-            if(item === e.target){
-                addLike(item);
-            }
-        })
-    }
-})
 
-gallery.addEventListener('click', (e) => {
-    let deleteBtn = document.querySelectorAll('.gallery__delete-button');
-    if(e.target && e.target.parentNode.parentNode.matches('.gallery__item')){
-        deleteBtn.forEach(item => {
-            if(item === e.target){
-                deleteCard(item);
-            }
-        })
-    }
-})
 
-// ==============Открытие фото по её нажатию
-gallery.addEventListener('click', (e) => {
-    let photoItems = document.querySelectorAll('.gallery__photo');
-    if(e.target && e.target.matches('.gallery__photo')){
-        photoItems.forEach(item => {
-            if(e.target ===item){
-                openPhoto(item)
-            }
-        });
-    }
-});
-
-function openPhoto(item) {
-    popupPhoto.src = item.src;
-    popupPhoto.alt = item.alt;
-    popupCaption.textContent = item.alt;
-    openPopup(popupArea);
-}
-
-popupArea.addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.popup_place_photo') || e.target.matches('.popup__close-button')) {
-        closePopup(popupArea);
-    }
-});
