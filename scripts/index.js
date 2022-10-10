@@ -1,32 +1,5 @@
 'use strict';
 
-const initialCards = [
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    },
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    }
-];
-
 const popupEdit = document.querySelector('.popup_edit');
 const formElementEdit = document.querySelector('.popup__edit-form');
 const nameInput = document.querySelector('.popup__input_edit_name');
@@ -36,12 +9,11 @@ const profileAbout = document.querySelector ('.profile__about');
 const editBtn = document.querySelector('.profile__edit-button');
 const closeEditBtn = document.querySelector('.popup__close-edit');
 
-const gallery = document.querySelector('.gallery__photos');
 const modalAddBtn = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('.popup_add');
 const popupAddForm = document.querySelector('.popup__add-form');
-const name = popupAddForm.querySelector('.popup__input_add_name');
-const link = popupAddForm.querySelector('.popup__input_add_link');
+const nameAddInput = popupAddForm.querySelector('.popup__input_add_name');
+const linkAddInput = popupAddForm.querySelector('.popup__input_add_link');
 
 const photoCardsContainer = document.querySelector('.gallery');
 const photoCardTemplate = document.querySelector('.gallery__photos').content;
@@ -70,7 +42,6 @@ function openEditPopup() {
 function closeEditPopup() {
     closePopup(popupEdit);
 }
-
 
 function handleProfileFormSubmit(e) {
     e.preventDefault();
@@ -152,13 +123,13 @@ popupAdd.addEventListener('click', (e) => {
 popupAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    createCard(gallery, 'li', name.value, link.value);
+    const addFormValue = {
+        name: nameAddInput.value,
+        link: linkAddInput.value,
+    }
+
+    photoCardsContainer.prepend(createCard(addFormValue));
+    e.target.reset();
+
     closePopup(popupAdd);
-
-    name.value = '';
-    link.value = '';
 });
-
-
-
-
