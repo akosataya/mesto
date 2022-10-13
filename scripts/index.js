@@ -27,13 +27,15 @@ const popupCaption = popupArea.querySelector('.popup__photo-caption');
 const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
 
-// ==============Открытие и закрытие попапов
+/** Открытие и закрытие попапов */
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeOnEscape);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeOnEscape);
 }
 
 popupList.forEach(popup => {
@@ -44,7 +46,14 @@ popupList.forEach(popup => {
     });
 })
 
-// ==============Работа с edit модальным окном
+function closeOnEscape(e) {
+    if (e.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    };
+}
+
+/** Работа с edit модальным окном */
 function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
@@ -61,7 +70,7 @@ function handleProfileFormSubmit(e) {
 editBtn.addEventListener('click', openEditPopup);
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
-// ==============Создание карточек
+/** Создание карточек */
 function createCard(card) {
     const photoCardElement = photoCardsTemplate.cloneNode(true);
     const photoPopup = photoCardElement.querySelector('.gallery__photo');
@@ -75,11 +84,11 @@ function createCard(card) {
     return photoCardElement;
 }
 
-// ==============Создание карточек из базы
+/** Создание карточек из базы */
 initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
 });
 
-// ==============Делегирование событий, для работы с лайками, удалением карточек и открытием фотографий
+/** Делегирование событий, для работы с лайками, удалением карточек и открытием фотографий */
 function setListenersOnPhotoCard(element) {
     const deleteBtn = element.querySelector('.gallery__delete-button');
     deleteBtn.addEventListener('click', deleteCard);
@@ -90,7 +99,7 @@ function setListenersOnPhotoCard(element) {
     element.querySelector('.gallery__photo').addEventListener('click', openPhoto);
 }
 
-// ==============Добавление функций лайков и мусорки
+/** Добавление функций лайков и мусорки */
 function deleteCard(e) {
     const trashItem = e.target.closest('.gallery__item');
     trashItem.remove();
@@ -100,7 +109,7 @@ function handleLikeCard(e) {
     e.target.classList.toggle('gallery__like-button_active');
 }
 
-// ==============Открытие фото по её нажатию
+/** Открытие фото по её нажатию */
 function openPhoto(e) {
     popupPhoto.src = e.target.src;
     popupPhoto.alt = e.target.alt;
@@ -108,7 +117,7 @@ function openPhoto(e) {
     openPopup(popupArea);
 }
 
-// ==============Работа с add -form и -модальным окном
+/** Работа с add -form и -модальным окном */
 popupAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -127,7 +136,7 @@ modalAddBtn.addEventListener('click', (e) => {
     openPopup(popupAdd);
 });
 
-// ==============Закрытие попапов
+/** Закрытие попапов */
 closeEditBtn.addEventListener('click', e => {
     closePopup(popupEdit);
 });
