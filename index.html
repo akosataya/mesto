@@ -37,9 +37,11 @@
         <div class="popup__container">
             <button class="popup__close-button popup__close-edit" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <form class="popup__form popup__edit-form" action="#" name="edit-form">
+            <form class="popup__form popup__edit-form" action="#" name="edit-form" novalidate>
                 <input class="popup__input popup__input_edit_name" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required>
+                <span class="popup__text-error name-input-error"></span>
                 <input class="popup__input popup__input_edit_about" type="text" placeholder="О себе" name="about" minlength="2" maxlength="200" required>
+                <span class="popup__text-error job-input-error"></span>
                 <button class="popup__save" type="submit">Сохранить</button>
             </form>
         </div>
@@ -48,9 +50,11 @@
         <div class="popup__container">
             <button class="popup__close-button popup__close-add" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Новое место</h3>
-            <form class="popup__form popup__add-form" action="#" name="add-form">
+            <form class="popup__form popup__add-form" action="#" name="add-form" novalidate>
                 <input class="popup__input popup__input_add_name" type="text" placeholder="Название" name="name" minlength="2" maxlength="30" required>
+                <span class="popup__text-error add-name-input-error"></span>
                 <input class="popup__input popup__input_add_link" type="url" placeholder="Ссылка на картинку" name="link" required>
+                <span class="popup__text-error add-link-input-error"></span>
                 <button class="popup__save" type="submit">Создать</button>
             </form>
         </div>
