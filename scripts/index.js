@@ -26,6 +26,9 @@ const popupPhoto = popupArea.querySelector('.popup__photo');
 const popupCaption = popupArea.querySelector('.popup__photo-caption');
 const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
+const error = document.querySelectorAll('.popup__text-error');
+
+
 
 /** Открытие и закрытие попапов */
 function openPopup(popup) {
@@ -132,8 +135,12 @@ popupAddForm.addEventListener('submit', (e) => {
     closePopup(popupAdd);
 });
 
+const btnSubmitAddPopup = popupAdd.querySelector('.popup__save');
+
 modalAddBtn.addEventListener('click', (e) => {
     openPopup(popupAdd);
+    makeDisabledBtn(btnSubmitAddPopup);
+    popupAddForm.reset();
 });
 
 /** Закрытие попапов */

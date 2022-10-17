@@ -22,8 +22,3 @@
         max-width: 238px;
     }
 }
-
-.popup__input:focus-visible {
-    outline: 1px solid blue;
-    padding: 4px 0 4px 4px;
-}
