@@ -1,6 +1,3 @@
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
-
 const validationFormList = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
