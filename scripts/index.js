@@ -73,7 +73,7 @@ formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
 /** Создание карточек */
 function createCard(card) {
-    const photoCardElement = photoCardsTemplate.cloneNode(true);
+    const photoCardElement = photoCardsTemplate.querySelector('.gallery__item').cloneNode(true);
     const photoPopup = photoCardElement.querySelector('.gallery__photo');
 
     photoPopup.src = card.link;
@@ -133,8 +133,11 @@ popupAddForm.addEventListener('submit', (e) => {
     closePopup(popupAdd);
 });
 
+const submitBtnAddPopup = popupAdd.querySelector('.popup__save');
 modalAddBtn.addEventListener('click', (e) => {
     openPopup(popupAdd);
+    makeDisabledBtn(submitBtnAddPopup);
+    popupAddForm.reset();
 });
 
 /** Закрытие попапов */
