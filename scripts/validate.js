@@ -7,6 +7,8 @@ const validationFormList = {
     errorClass: 'popup__text-error'
 };
 
+
+
 const enableValidation = (validationFormList) => {
     const formList = Array.from(document.querySelectorAll(validationFormList.formSelector));
 
