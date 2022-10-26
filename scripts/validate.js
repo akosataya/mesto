@@ -1,3 +1,5 @@
+'use strict';
+
 const validationFormList = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
