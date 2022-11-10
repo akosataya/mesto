@@ -1,4 +1,4 @@
-export default class FormValidator
+// export default class FormValidator
 
 
 

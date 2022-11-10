@@ -1,5 +1,5 @@
 import {initialCards} from './cards.js';
-import FormValidator from './FormValidator.js';
+// import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 
 
@@ -22,7 +22,6 @@ const linkAddInput = popupAddForm.querySelector('.popup__input_add_link');
 const closeAddBtn = document.querySelector('.popup__close-add');
 
 const photoCardsContainer = document.querySelector('.gallery');
-const photoCardsTemplate = document.querySelector('.gallery__photos').content;
 
 const popupArea = document.querySelector('.popup_place-photo');
 const popupPhoto = popupArea.querySelector('.popup__photo');
@@ -75,43 +74,18 @@ editBtn.addEventListener('click', openEditPopup);
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
 /** Создание карточек */
-function createCard(card) {
-    const photoCardElement = photoCardsTemplate.querySelector('.gallery__item').cloneNode(true);
-    const photoPopup = photoCardElement.querySelector('.gallery__photo');
-
-    photoPopup.src = card.link;
-    photoPopup.alt = card.name;
-    photoCardElement.querySelector('.gallery__title').textContent = card.name;
-
-    setListenersOnPhotoCard(photoCardElement);
-
-    return photoCardElement;
+function createCard(data) {
+    const card = new Card(data, '.gallery__photos', openPhoto);
+    const cardItem = card.generateCard();
+    return cardItem;
 }
 
 /** Создание карточек из базы */
 initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
 });
 
-/** Делегирование событий, для работы с лайками, удалением карточек и открытием фотографий */
-function setListenersOnPhotoCard(element) {
-    const deleteBtn = element.querySelector('.gallery__delete-button');
-    deleteBtn.addEventListener('click', deleteCard);
 
-    const likeBtn = element.querySelector('.gallery__like-button');
-    likeBtn.addEventListener('click', handleLikeCard);
 
-    element.querySelector('.gallery__photo').addEventListener('click', openPhoto);
-}
-
-/** Добавление функций лайков и мусорки */
-function deleteCard(evt) {
-    const trashItem = evt.target.closest('.gallery__item');
-    trashItem.remove();
-}
-
-function handleLikeCard(evt) {
-    evt.target.classList.toggle('gallery__like-button_active');
-}
 
 /** Открытие фото по её нажатию */
 function openPhoto(evt) {
