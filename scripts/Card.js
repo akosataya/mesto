@@ -46,7 +46,7 @@ export default class Card {
 
     _openCardPhoto() {
         this._photo.addEventListener('click', () => {
-            this._openCardPhoto(this._name, this._link);
+            this._openPhoto(this._name, this._link);
         });
     }
 

@@ -24,8 +24,8 @@ const closeAddBtn = document.querySelector('.popup__close-add');
 const photoCardsContainer = document.querySelector('.gallery');
 
 const popupArea = document.querySelector('.popup_place-photo');
-const popupPhoto = popupArea.querySelector('.popup__photo');
-const popupCaption = popupArea.querySelector('.popup__photo-caption');
+const photo = popupArea.querySelector('.popup__photo');
+const caption = popupArea.querySelector('.popup__photo-caption');
 const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
 
@@ -84,14 +84,11 @@ function createCard(data) {
 initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
 });
 
-
-
-
 /** Открытие фото по её нажатию */
-function openPhoto(evt) {
-    popupPhoto.src = evt.target.src;
-    popupPhoto.alt = evt.target.alt;
-    popupCaption.textContent = evt.target.alt;
+function openPhoto(name, link) {
+    photo.src = link;
+    photo.alt = name;
+    caption.textContent = name;
     openPopup(popupArea);
 }
 
