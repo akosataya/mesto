@@ -1,4 +1,7 @@
-'use strict';
+import {initialCards} from './cards.js';
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
 
 const popupList = document.querySelectorAll('.popup');
 

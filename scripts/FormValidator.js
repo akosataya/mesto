@@ -1,4 +1,6 @@
-'use strict';
+export default class FormValidator
+
+
 
 const validationFormList = {
     formSelector: '.popup__form',
