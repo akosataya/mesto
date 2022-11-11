@@ -28,7 +28,14 @@ const photo = popupArea.querySelector('.popup__photo');
 const caption = popupArea.querySelector('.popup__photo-caption');
 const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
-
+const validationFormList = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactive',
+    inputErrorClass: 'popup__input_type-error',
+    errorClass: 'popup__text-error'
+};
 
 /** Открытие и закрытие попапов */
 function openPopup(popup) {
