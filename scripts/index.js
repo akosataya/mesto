@@ -12,24 +12,21 @@ const jobInput = document.querySelector('.popup__input_edit_about');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector ('.profile__about');
 const editBtn = document.querySelector('.profile__edit-button');
-const closeEditBtn = document.querySelector('.popup__close-edit');
 
 const modalAddBtn = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('.popup_add');
 const popupAddForm = document.querySelector('.popup__add-form');
 const nameAddInput = popupAddForm.querySelector('.popup__input_add_name');
 const linkAddInput = popupAddForm.querySelector('.popup__input_add_link');
-const closeAddBtn = document.querySelector('.popup__close-add');
 
 const photoCardsContainer = document.querySelector('.gallery');
 
 const popupArea = document.querySelector('.popup_place-photo');
 const photo = popupArea.querySelector('.popup__photo');
 const caption = popupArea.querySelector('.popup__photo-caption');
-const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
 /** Валидация */
-const validationFormList = {
+const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save',
@@ -38,10 +35,10 @@ const validationFormList = {
     errorClass: 'popup__text-error'
 };
 
-const editValidator = new FormValidator(validationFormList, formElementEdit);
+const editValidator = new FormValidator(validationConfig, formElementEdit);
 editValidator.enableValidation();
 
-const addValidator = new FormValidator(validationFormList, popupAddForm);
+const addValidator = new FormValidator(validationConfig, popupAddForm);
 addValidator.enableValidation();
 
 /** Открытие и закрытие попапов */
@@ -75,6 +72,7 @@ function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
     editValidator.makeDisabledBtn();
+    editValidator.resetErrors();
     openPopup(popupEdit);
 }
 
@@ -91,8 +89,7 @@ formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 /** Создание карточек */
 function createCard(data) {
     const card = new Card(data, '.gallery__photos', openPhoto);
-    const cardItem = card.generateCard();
-    return cardItem;
+    return card.generateCard();
 }
 
 /** Создание карточек из базы */
@@ -127,18 +124,6 @@ const submitBtnAddPopup = popupAdd.querySelector('.popup__save');
 modalAddBtn.addEventListener('click', (evt) => {
     openPopup(popupAdd);
     addValidator.makeDisabledBtn();
+    addValidator.resetErrors();
     popupAddForm.reset();
-});
-
-/** Закрытие попапов */
-closeEditBtn.addEventListener('click', evt => {
-    closePopup(popupEdit);
-});
-
-closePhotoBtn.addEventListener('click', evt => {
-    closePopup(popupArea);
-});
-
-closeAddBtn.addEventListener('click', evt => {
-    closePopup(popupAdd);
 });

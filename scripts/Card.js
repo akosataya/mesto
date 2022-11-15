@@ -32,28 +32,28 @@ export default class Card {
         return this._element;
     }
 
-    _handleLikeCard() {
+    _initLikeCard() {
         this._likeBtn.addEventListener('click', (evt) => {
             evt.target.classList.toggle('gallery__like-button_active');
         });
     }
 
-    _deleteCard() {
+    _initDeleteCard() {
         this._deleteBtn.addEventListener('click', () => {
             this._element.remove();
         });
     }
 
-    _openCardPhoto() {
+    _setPhotoPopupListener() {
         this._photo.addEventListener('click', () => {
             this._openPhoto(this._name, this._link);
         });
     }
 
     _setListenersOnPhotoCard() {
-        this._handleLikeCard();
-        this._deleteCard();
-        this._openCardPhoto();
+        this._initLikeCard();
+        this._initDeleteCard();
+        this._setPhotoPopupListener();
     }
 }
 
