@@ -1,6 +1,6 @@
 import {initialCards} from './cards.js';
-// import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import FormValidator from "./FormValidator.js";
 
 
 const popupList = document.querySelectorAll('.popup');
@@ -28,6 +28,7 @@ const photo = popupArea.querySelector('.popup__photo');
 const caption = popupArea.querySelector('.popup__photo-caption');
 const closePhotoBtn = popupArea.querySelector('.popup__close-photo');
 
+/** Валидация */
 const validationFormList = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -36,6 +37,12 @@ const validationFormList = {
     inputErrorClass: 'popup__input_type-error',
     errorClass: 'popup__text-error'
 };
+
+const editValidator = new FormValidator(validationFormList, formElementEdit);
+editValidator.enableValidation();
+
+const addValidator = new FormValidator(validationFormList, popupAddForm);
+addValidator.enableValidation();
 
 /** Открытие и закрытие попапов */
 function openPopup(popup) {
@@ -67,6 +74,7 @@ function closeOnEscape(evt) {
 function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
+    editValidator.makeDisabledBtn();
     openPopup(popupEdit);
 }
 
@@ -88,7 +96,8 @@ function createCard(data) {
 }
 
 /** Создание карточек из базы */
-initialCards.forEach(element => {photoCardsContainer.prepend(createCard(element));
+initialCards.forEach((element) => {
+    photoCardsContainer.prepend(createCard(element));
 });
 
 /** Открытие фото по её нажатию */
@@ -117,7 +126,7 @@ popupAddForm.addEventListener('submit', (evt) => {
 const submitBtnAddPopup = popupAdd.querySelector('.popup__save');
 modalAddBtn.addEventListener('click', (evt) => {
     openPopup(popupAdd);
-    makeDisabledBtn(submitBtnAddPopup);
+    addValidator.makeDisabledBtn();
     popupAddForm.reset();
 });
 
