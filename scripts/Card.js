@@ -33,15 +33,11 @@ export default class Card {
     }
 
     _initLikeCard() {
-        this._likeBtn.addEventListener('click', (evt) => {
-            evt.target.classList.toggle('gallery__like-button_active');
-        });
+        this._likeBtn.classList.toggle('gallery__like-button_active');
     }
 
     _initDeleteCard() {
-        this._deleteBtn.addEventListener('click', () => {
-            this._element.remove();
-        });
+        this._element.remove();
     }
 
     _setPhotoPopupListener() {
@@ -51,8 +47,14 @@ export default class Card {
     }
 
     _setListenersOnPhotoCard() {
-        this._initLikeCard();
-        this._initDeleteCard();
+        this._likeBtn.addEventListener('click', () => {
+            this._initLikeCard();
+        });
+
+        this._deleteBtn.addEventListener('click', () => {
+            this._initDeleteCard();
+        });
+
         this._setPhotoPopupListener();
     }
 }

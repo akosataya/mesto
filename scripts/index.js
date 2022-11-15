@@ -32,7 +32,7 @@ const validationConfig = {
     submitButtonSelector: '.popup__save',
     inactiveButtonClass: 'popup__save_inactive',
     inputErrorClass: 'popup__input_type-error',
-    errorClass: 'popup__text-error'
+    errorClass: 'popup__text-error_visible'
 };
 
 const editValidator = new FormValidator(validationConfig, formElementEdit);
