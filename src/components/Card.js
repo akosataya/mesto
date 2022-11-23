@@ -3,7 +3,7 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._openPhoto = openPhoto;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -32,27 +32,27 @@ export default class Card {
         return this._element;
     }
 
-    _initLikeCard() {
+    _handleCardLike() {
         this._likeBtn.classList.toggle('gallery__like-button_active');
     }
 
-    _initDeleteCard() {
+    _handleCardDelete() {
         this._element.remove();
     }
 
     _setPhotoPopupListener() {
         this._photo.addEventListener('click', () => {
-            this._openPhoto(this._name, this._link);
+            this._handleCardClick(this._name, this._link);
         });
     }
 
     _setListenersOnPhotoCard() {
         this._likeBtn.addEventListener('click', () => {
-            this._initLikeCard();
+            this._handleCardLike();
         });
 
         this._deleteBtn.addEventListener('click', () => {
-            this._initDeleteCard();
+            this._handleCardDelete();
         });
 
         this._setPhotoPopupListener();

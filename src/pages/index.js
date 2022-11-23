@@ -5,6 +5,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 
 /** Валидация */
@@ -13,6 +14,9 @@ editValidator.enableValidation();
 
 const addValidator = new FormValidator(validationConfig, popupAddForm);
 addValidator.enableValidation();
+
+
+
 
 // /** Открытие и закрытие попапов */
 // function openPopup(popup) {
@@ -40,24 +44,24 @@ addValidator.enableValidation();
 //     };
 // }
 
-/** Работа с edit модальным окном */
-function openEditPopup() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileAbout.textContent;
-    editValidator.makeDisabledBtn();
-    editValidator.resetErrors();
-    openPopup(popupEdit);
-}
+// /** Работа с edit модальным окном */
+// function openEditPopup() {
+//     nameInput.value = profileName.textContent;
+//     jobInput.value = profileAbout.textContent;
+//     editValidator.makeDisabledBtn();
+//     editValidator.resetErrors();
+//     openPopup(popupEdit);
+// }
 
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
-    closePopup(popupEdit);
-}
+// function handleProfileFormSubmit(evt) {
+//     evt.preventDefault();
+//     profileName.textContent = nameInput.value;
+//     profileAbout.textContent = jobInput.value;
+//     closePopup(popupEdit);
+// }
 
-editBtn.addEventListener('click', openEditPopup);
-formElementEdit.addEventListener('submit', handleProfileFormSubmit);
+// editBtn.addEventListener('click', openEditPopup);
+// formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 
 /** Создание карточек */
 function createCard(data) {
@@ -71,12 +75,12 @@ initialCards.forEach((element) => {
 });
 
 /** Открытие фото по её нажатию */
-function openPhoto(name, link) {
-    photo.src = link;
-    photo.alt = name;
-    caption.textContent = name;
-    openPopup(popupArea);
-}
+// function openPhoto(name, link) {
+//     photo.src = link;
+//     photo.alt = name;
+//     caption.textContent = name;
+//     openPopup(popupArea);
+// }
 
 /** Работа с add -form и -модальным окном */
 popupAddForm.addEventListener('submit', (evt) => {
