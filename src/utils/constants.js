@@ -34,8 +34,6 @@ export const validationConfig = {
     errorClass: 'popup__text-error_visible'
 };
 
-export const popupList = document.querySelectorAll('.popup');
-
 export const popupEdit = document.querySelector('.popup_edit');
 export const formElementEdit = document.querySelector('.popup__edit-form');
 export const nameInput = document.querySelector('.popup__input_edit_name');
@@ -53,5 +51,3 @@ export const linkAddInput = popupAddForm.querySelector('.popup__input_add_link')
 export const photoCardsContainer = document.querySelector('.gallery');
 
 export const popupArea = document.querySelector('.popup_place-photo');
-export const photo = popupArea.querySelector('.popup__photo');
-export const caption = popupArea.querySelector('.popup__photo-caption');

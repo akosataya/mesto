@@ -1,6 +1,10 @@
-import { initialCards, validationConfig, popupAddForm, formElementEdit, popupList, nameInput, jobInput, profileName, profileAbout, popupEdit, editBtn, photoCardsContainer, photo, caption, popupArea, popupAdd, modalAddBtn, nameAddInput, linkAddInput } from '../utils/constants.js';
+import { initialCards, validationConfig, popupAddForm, formElementEdit, nameInput, jobInput, profileName, profileAbout, popupEdit, editBtn, photoCardsContainer, popupArea, popupAdd, modalAddBtn, nameAddInput, linkAddInput } from '../utils/constants.js';
+
 import Card from '../components/Card.js';
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 
 /** Валидация */
@@ -10,31 +14,31 @@ editValidator.enableValidation();
 const addValidator = new FormValidator(validationConfig, popupAddForm);
 addValidator.enableValidation();
 
-/** Открытие и закрытие попапов */
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeOnEscape);
-}
+// /** Открытие и закрытие попапов */
+// function openPopup(popup) {
+//     popup.classList.add('popup_opened');
+//     document.addEventListener('keydown', closeOnEscape);
+// }
+//
+// function closePopup(popup) {
+//     popup.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', closeOnEscape);
+// }
 
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeOnEscape);
-}
+// popupList.forEach(popup => {
+//     popup.addEventListener('click', (evt) => {
+//         if(evt.target && evt.target.matches('.popup_opened') || evt.target.matches('.popup__close-button')) {
+//             closePopup(popup);
+//         }
+//     });
+// })
 
-popupList.forEach(popup => {
-    popup.addEventListener('click', (evt) => {
-        if(evt.target && evt.target.matches('.popup_opened') || evt.target.matches('.popup__close-button')) {
-            closePopup(popup);
-        }
-    });
-})
-
-function closeOnEscape(evt) {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    };
-}
+// function closeOnEscape(evt) {
+//     if (evt.key === 'Escape') {
+//         const openedPopup = document.querySelector('.popup_opened');
+//         closePopup(openedPopup);
+//     };
+// }
 
 /** Работа с edit модальным окном */
 function openEditPopup() {
