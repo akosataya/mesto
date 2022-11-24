@@ -1,3 +1,5 @@
+import "./index.css";
+
 import { initialCards,
     validationConfig,
     popupAddForm,
@@ -30,8 +32,8 @@ function createCard(items) {
     const card = new Card({
         data: items,
         templateSelector: '.gallery__photos',
-        handleCardClick: (items) => {
-            popupOpenedPhoto.open(items);
+        handleCardClick: (name, link) => {
+            popupOpenedPhoto.open(name, link);
         }
     });
 
@@ -101,6 +103,3 @@ popupAddUserPhotos.setEventListeners();
 /** Экземпляр класса попапа открытия фотокарточек */
 const popupOpenedPhoto = new PopupWithImage(popupArea);
 popupOpenedPhoto.setEventListeners();
-
-
-// не открываются фотки
