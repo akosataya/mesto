@@ -38,16 +38,10 @@ export const popupEdit = document.querySelector('.popup_edit');
 export const formElementEdit = document.querySelector('.popup__edit-form');
 export const nameInput = document.querySelector('.popup__input_edit_name');
 export const jobInput = document.querySelector('.popup__input_edit_about');
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector ('.profile__about');
 export const editBtn = document.querySelector('.profile__edit-button');
 
 export const modalAddBtn = document.querySelector('.profile__add-button');
 export const popupAdd = document.querySelector('.popup_add');
 export const popupAddForm = document.querySelector('.popup__add-form');
-export const nameAddInput = popupAddForm.querySelector('.popup__input_add_name');
-export const linkAddInput = popupAddForm.querySelector('.popup__input_add_link');
-
-export const photoCardsContainer = document.querySelector('.gallery');
 
 export const popupArea = document.querySelector('.popup_place-photo');

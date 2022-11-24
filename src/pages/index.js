@@ -1,6 +1,16 @@
-import { initialCards, validationConfig, popupAddForm, formElementEdit, nameInput, jobInput, profileName, profileAbout, popupEdit, editBtn, photoCardsContainer, popupArea, popupAdd, modalAddBtn, nameAddInput, linkAddInput } from '../utils/constants.js';
+import { initialCards,
+    validationConfig,
+    popupAddForm,
+    formElementEdit,
+    nameInput,
+    jobInput,
+    popupEdit,
+    editBtn,
+    popupArea,
+    popupAdd,
+    modalAddBtn } from '../utils/constants.js';
 
-import Card from '../components/Card.js';
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -15,91 +25,82 @@ editValidator.enableValidation();
 const addValidator = new FormValidator(validationConfig, popupAddForm);
 addValidator.enableValidation();
 
-
-
-
-// /** Открытие и закрытие попапов */
-// function openPopup(popup) {
-//     popup.classList.add('popup_opened');
-//     document.addEventListener('keydown', closeOnEscape);
-// }
-//
-// function closePopup(popup) {
-//     popup.classList.remove('popup_opened');
-//     document.removeEventListener('keydown', closeOnEscape);
-// }
-
-// popupList.forEach(popup => {
-//     popup.addEventListener('click', (evt) => {
-//         if(evt.target && evt.target.matches('.popup_opened') || evt.target.matches('.popup__close-button')) {
-//             closePopup(popup);
-//         }
-//     });
-// })
-
-// function closeOnEscape(evt) {
-//     if (evt.key === 'Escape') {
-//         const openedPopup = document.querySelector('.popup_opened');
-//         closePopup(openedPopup);
-//     };
-// }
-
-// /** Работа с edit модальным окном */
-// function openEditPopup() {
-//     nameInput.value = profileName.textContent;
-//     jobInput.value = profileAbout.textContent;
-//     editValidator.makeDisabledBtn();
-//     editValidator.resetErrors();
-//     openPopup(popupEdit);
-// }
-
-// function handleProfileFormSubmit(evt) {
-//     evt.preventDefault();
-//     profileName.textContent = nameInput.value;
-//     profileAbout.textContent = jobInput.value;
-//     closePopup(popupEdit);
-// }
-
-// editBtn.addEventListener('click', openEditPopup);
-// formElementEdit.addEventListener('submit', handleProfileFormSubmit);
-
 /** Создание карточек */
-function createCard(data) {
-    const card = new Card(data, '.gallery__photos', openPhoto);
+function createCard(items) {
+    const card = new Card({
+        data: items,
+        templateSelector: '.gallery__photos',
+        handleCardClick: (items) => {
+            popupOpenedPhoto.open(items);
+        }
+    });
+
     return card.generateCard();
 }
 
-/** Создание карточек из базы */
-initialCards.forEach((element) => {
-    photoCardsContainer.prepend(createCard(element));
-});
+const cardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        cardList.addItem(createCard(item));
+        },
+    },
+    '.gallery',
+);
 
-/** Открытие фото по её нажатию */
-// function openPhoto(name, link) {
-//     photo.src = link;
-//     photo.alt = name;
-//     caption.textContent = name;
-//     openPopup(popupArea);
-// }
+cardList.renderItems(initialCards);
 
-/** Работа с add -form и -модальным окном */
-popupAddForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
 
-    const addFormValue = {
-        name: nameAddInput.value,
-        link: linkAddInput.value,
-    }
+/** Экземпляр класса попапа изменения профиля пользователя */
+const userInfo = new UserInfo({
+    name: '.profile__name',
+    about: '.profile__about',
+})
 
-    photoCardsContainer.prepend(createCard(addFormValue));
-    evt.target.reset();
+const popupEditUserProfile = new PopupWithForm(popupEdit, submitEditPopup);
 
-    closePopup(popupAdd);
-});
+editBtn.addEventListener('click', () => {
+    const input = userInfo.getUserInfo();
+    nameInput.value = input.name;
+    jobInput.value = input.about;
 
-modalAddBtn.addEventListener('click', (evt) => {
-    openPopup(popupAdd);
+    editValidator.resetErrors();
+    editValidator.makeDisabledBtn();
+    popupEditUserProfile.open();
+})
+
+function submitEditPopup(data) {
+    userInfo.setUserInfo(data.name, data.about);
+    popupEditUserProfile.close();
+}
+
+popupEditUserProfile.setEventListeners();
+
+
+/** Экземпляр класса попапа добавления фотокарточек */
+const popupAddUserPhotos = new PopupWithForm(popupAdd, submitAddPopup);
+
+modalAddBtn.addEventListener('click', () => {
     addValidator.makeDisabledBtn();
     addValidator.resetErrors();
-    popupAddForm.reset();
+    // popupAddUserPhotos.reset();
+    popupAddUserPhotos.open();
 });
+
+function submitAddPopup(data) {
+    const addFormValue = {
+        name: data.placeName,
+        link: data.placeLink,
+    };
+    cardList.addItem(createCard(addFormValue));
+    popupAddUserPhotos.close();
+}
+
+popupAddUserPhotos.setEventListeners();
+
+
+/** Экземпляр класса попапа открытия фотокарточек */
+const popupOpenedPhoto = new PopupWithImage(popupArea);
+popupOpenedPhoto.setEventListeners();
+
+
+// не открываются фотки

@@ -16,7 +16,7 @@
     <main class="content">
         <section class="profile">
             <div class="profile__data">
-                <img src="images/profile-image.png" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
+                <img src="images/profile-image.jpeg" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
                 <div class="profile__text">
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -51,9 +51,9 @@
             <button class="popup__close-button popup__close-add" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Новое место</h3>
             <form class="popup__form popup__add-form" action="#" name="add-form" novalidate>
-                <input id="add-name-input" class="popup__input popup__input_add_name" type="text" placeholder="Название" name="name" minlength="2" maxlength="30" required>
+                <input id="add-name-input" class="popup__input popup__input_add_name" type="text" placeholder="Название" name="placeName" minlength="2" maxlength="30" required>
                 <span class="popup__text-error add-name-input-error"></span>
-                <input id="add-link-input" class="popup__input popup__input_add_link" type="url" placeholder="Ссылка на картинку" name="link" required>
+                <input id="add-link-input" class="popup__input popup__input_add_link" type="url" placeholder="Ссылка на картинку" name="placeLink" required>
                 <span class="popup__text-error add-link-input-error"></span>
                 <button class="popup__save" type="submit">Создать</button>
             </form>
@@ -78,6 +78,6 @@
             <button class="gallery__delete-button" type="button" aria-label="Мусорка"></button>
         </li>
     </template>
-    <script type="module" src="pages/index.js"></script>
+    <script type="module" src="./pages/index.js"></script>
 </body>
 </html>
