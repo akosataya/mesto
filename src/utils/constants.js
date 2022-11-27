@@ -38,7 +38,7 @@ export const popupEdit = document.querySelector('.popup_edit');
 export const formElementEdit = document.querySelector('.popup__edit-form');
 export const nameInput = document.querySelector('.popup__input_edit_name');
 export const jobInput = document.querySelector('.popup__input_edit_about');
-export const editBtn = document.querySelector('.profile__edit-button');
+export const profileBtn = document.querySelector('.profile__edit-button');
 
 export const modalAddBtn = document.querySelector('.profile__add-button');
 export const popupAdd = document.querySelector('.popup_add');

@@ -1,16 +1,18 @@
 import "./index.css";
 
-import { initialCards,
+import {
+    initialCards,
     validationConfig,
     popupAddForm,
     formElementEdit,
     nameInput,
     jobInput,
     popupEdit,
-    editBtn,
+    profileBtn,
     popupArea,
     popupAdd,
-    modalAddBtn } from "../utils/constants.js";
+    modalAddBtn
+} from "../utils/constants.js";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -21,16 +23,16 @@ import UserInfo from "../components/UserInfo.js";
 
 
 /** Валидация */
-const editValidator = new FormValidator(validationConfig, formElementEdit);
-editValidator.enableValidation();
+const profileFormValidator = new FormValidator(validationConfig, formElementEdit);
+profileFormValidator.enableValidation();
 
-const addValidator = new FormValidator(validationConfig, popupAddForm);
-addValidator.enableValidation();
+const cardFormValidator = new FormValidator(validationConfig, popupAddForm);
+cardFormValidator.enableValidation();
 
 /** Создание карточек */
-function createCard(items) {
+function createCard(cardData) {
     const card = new Card({
-        data: items,
+        data: cardData,
         templateSelector: '.gallery__photos',
         handleCardClick: (name, link) => {
             popupOpenedPhoto.open(name, link);
@@ -40,16 +42,16 @@ function createCard(items) {
     return card.generateCard();
 }
 
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        cardList.addItem(createCard(item));
+const cardsSection = new Section({
+        items: initialCards,
+        renderer: (item) => {
+            cardsSection.addItem(createCard(item));
         },
     },
     '.gallery',
 );
 
-cardList.renderItems(initialCards);
+cardsSection.renderItems(initialCards);
 
 
 /** Экземпляр класса попапа изменения профиля пользователя */
@@ -58,19 +60,18 @@ const userInfo = new UserInfo({
     about: '.profile__about',
 })
 
-const popupEditUserProfile = new PopupWithForm(popupEdit, submitEditPopup);
+const popupEditUserProfile = new PopupWithForm(popupEdit, handleProfileFormSubmit);
 
-editBtn.addEventListener('click', () => {
+profileBtn.addEventListener('click', () => {
     const input = userInfo.getUserInfo();
     nameInput.value = input.name;
     jobInput.value = input.about;
 
-    editValidator.resetErrors();
-    editValidator.makeDisabledBtn();
+    profileFormValidator.resetErrors();
     popupEditUserProfile.open();
 })
 
-function submitEditPopup(data) {
+function handleProfileFormSubmit(data) {
     userInfo.setUserInfo(data.name, data.about);
     popupEditUserProfile.close();
 }
@@ -79,21 +80,20 @@ popupEditUserProfile.setEventListeners();
 
 
 /** Экземпляр класса попапа добавления фотокарточек */
-const popupAddUserPhotos = new PopupWithForm(popupAdd, submitAddPopup);
+const popupAddUserPhotos = new PopupWithForm(popupAdd, handleCardFormSubmit);
 
 modalAddBtn.addEventListener('click', () => {
-    addValidator.makeDisabledBtn();
-    addValidator.resetErrors();
-    // popupAddUserPhotos.reset();
+    cardFormValidator.makeDisabledBtn();
+    cardFormValidator.resetErrors();
     popupAddUserPhotos.open();
 });
 
-function submitAddPopup(data) {
-    const addFormValue = {
+function handleCardFormSubmit(data) {
+    const ProfileFormValue = {
         name: data.placeName,
         link: data.placeLink,
     };
-    cardList.addItem(createCard(addFormValue));
+    cardsSection.addItem(createCard(ProfileFormValue));
     popupAddUserPhotos.close();
 }
 
