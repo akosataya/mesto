@@ -10,7 +10,7 @@ import { initialCards,
     editBtn,
     popupArea,
     popupAdd,
-    modalAddBtn } from '../utils/constants.js';
+    modalAddBtn } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";

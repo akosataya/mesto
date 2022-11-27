@@ -7,16 +7,15 @@
     <meta name="author" content="Анастасия Косатая">
     <meta name="description" content="Учебная проектная работа Mesto">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
 </head>
 <body class="page">
     <header class="header">
-        <img src="images/header-logo.svg" alt="Логотип" class="header__logo" loading="eager">
+        <img src="<%=require('./images/header-logo.svg')%>" alt="Логотип" class="header__logo" loading="eager">
     </header>
     <main class="content">
         <section class="profile">
             <div class="profile__data">
-                <img src="images/profile-image.jpeg" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
+                <img src="<%=require('./images/profile-image.jpeg')%>" alt="Портрет Жака-Ив Кусто" class="profile__avatar" loading="eager">
                 <div class="profile__text">
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -37,7 +36,7 @@
         <div class="popup__container">
             <button class="popup__close-button popup__close-edit" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <form class="popup__form popup__edit-form" action="#" name="edit-form" novalidate>
+            <form class="popup__form popup__edit-form" name="edit-form" novalidate>
                 <input id="name-input" class="popup__input popup__input_edit_name" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required>
                 <span class="popup__text-error name-input-error"></span>
                 <input id="about-input" class="popup__input popup__input_edit_about" type="text" placeholder="О себе" name="about" minlength="2" maxlength="200" required>
@@ -50,7 +49,7 @@
         <div class="popup__container">
             <button class="popup__close-button popup__close-add" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Новое место</h3>
-            <form class="popup__form popup__add-form" action="#" name="add-form" novalidate>
+            <form class="popup__form popup__add-form" name="add-form" novalidate>
                 <input id="add-name-input" class="popup__input popup__input_add_name" type="text" placeholder="Название" name="placeName" minlength="2" maxlength="30" required>
                 <span class="popup__text-error add-name-input-error"></span>
                 <input id="add-link-input" class="popup__input popup__input_add_link" type="url" placeholder="Ссылка на картинку" name="placeLink" required>
@@ -63,7 +62,7 @@
         <div class="popup__photo-container">
             <button class="popup__close-button popup__close-photo" type="button"></button>
             <figure class="popup__photo-item">
-                <img class="popup__photo " src="#" alt>
+                <img class="popup__photo" src="#" alt>
                 <figcaption class="popup__photo-caption"></figcaption>
             </figure>
         </div>
@@ -78,6 +77,5 @@
             <button class="gallery__delete-button" type="button" aria-label="Мусорка"></button>
         </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
 </body>
 </html>
