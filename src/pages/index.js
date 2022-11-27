@@ -11,7 +11,8 @@ import {
     profileBtn,
     popupArea,
     popupAdd,
-    modalAddBtn
+    modalAddBtn,
+    // inputElementBlala
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -56,8 +57,8 @@ cardsSection.renderItems(initialCards);
 
 /** Экземпляр класса попапа изменения профиля пользователя */
 const userInfo = new UserInfo({
-    name: '.profile__name',
-    about: '.profile__about',
+    nameSelector: '.profile__name',
+    aboutSelector: '.profile__about',
 })
 
 const popupEditUserProfile = new PopupWithForm(popupEdit, handleProfileFormSubmit);
@@ -103,3 +104,11 @@ popupAddUserPhotos.setEventListeners();
 /** Экземпляр класса попапа открытия фотокарточек */
 const popupOpenedPhoto = new PopupWithImage(popupArea);
 popupOpenedPhoto.setEventListeners();
+
+
+// inputElementBlala.addEventListener('change', (evt) => {
+//     const inputRawValue = evt.target.value;
+//     // const inputClearedValue = inputRawValue.replace(/^ +/g, '');
+//     const inputClearedValue = inputRawValue.replace(/a/g, '');
+//     return inputClearedValue;
+// })
