@@ -11,8 +11,7 @@ import {
     profileBtn,
     popupArea,
     popupAdd,
-    modalAddBtn,
-    // inputElementBlala
+    modalAddBtn
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -104,11 +103,3 @@ popupAddUserPhotos.setEventListeners();
 /** Экземпляр класса попапа открытия фотокарточек */
 const popupOpenedPhoto = new PopupWithImage(popupArea);
 popupOpenedPhoto.setEventListeners();
-
-
-// inputElementBlala.addEventListener('change', (evt) => {
-//     const inputRawValue = evt.target.value;
-//     // const inputClearedValue = inputRawValue.replace(/^ +/g, '');
-//     const inputClearedValue = inputRawValue.replace(/a/g, '');
-//     return inputClearedValue;
-// })

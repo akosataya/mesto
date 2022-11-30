@@ -35,7 +35,6 @@ export const validationConfig = {
 };
 
 export const popupEdit = document.querySelector('.popup_edit');
-// export const inputElementBlala = document.querySelector('.popup__input');
 export const formElementEdit = document.querySelector('.popup__edit-form');
 export const nameInput = document.querySelector('.popup__input_edit_name');
 export const jobInput = document.querySelector('.popup__input_edit_about');
