@@ -89,11 +89,11 @@ modalAddBtn.addEventListener('click', () => {
 });
 
 function handleCardFormSubmit(data) {
-    const ProfileFormValue = {
+    const cardData = {
         name: data.placeName,
         link: data.placeLink,
     };
-    cardsSection.addItem(createCard(ProfileFormValue));
+    cardsSection.addItem(createCard(cardData));
     popupAddUserPhotos.close();
 }
 

@@ -63,7 +63,7 @@ export default class FormValidator {
 
     makeDisabledBtn() {
         this._submitBtn.classList.add(this._inactiveButtonClass);
-        this._submitBtn.disabled = "true";
+        this._submitBtn.disabled = true;
     }
 
     _removeDisabledBtn() {
