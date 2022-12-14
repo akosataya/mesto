@@ -36,6 +36,11 @@ module.exports = {
                 },
                     'postcss-loader']
             },
+            {
+                test: /\.js$/,
+                enforce: "pre",
+                use: ["source-map-loader"],
+            },
         ]
     },
     plugins: [
