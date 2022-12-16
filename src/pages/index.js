@@ -1,7 +1,7 @@
 import "./index.css";
 
 import {
-    initialCards,
+    // initialCards,
     validationConfig,
     popupAddForm,
     formElementEdit,
@@ -24,7 +24,8 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import PopupWithConfirmation from "../components/PopupWithConfirmation";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import Api from "../components/Api.js";
 
 
 
@@ -71,7 +72,7 @@ function createCard(cardData) {
             popupDeletePhoto.open();
             popupDeletePhoto.setDeletionSubmit(() => {
                 api.deleteCard(id)
-                    .then((res) => {
+                    .then(() => {
                         card.handleCardDelete();
                         popupDeletePhoto.close();
                     })
@@ -105,15 +106,12 @@ function createCard(cardData) {
 }
 
 const cardsSection = new Section({
-        items: initialCards,
         renderer: (item) => {
             cardsSection.addItem(createCard(item));
         },
     },
     '.gallery',
 );
-
-cardsSection.renderItems(initialCards);
 
 
 /** Экземпляр класса попапа изменения профиля пользователя */
@@ -138,8 +136,8 @@ function handleProfileFormSubmit(data) {
     popupEditUserProfile.renderLoading(true);
 
     api.setNewUserInfo(data.name, data.about)
-        .then((data) => {
-            userInfo.setUserInfo(data.name, data.about);
+        .then((name, about) => {
+            userInfo.setUserInfo(name, about);
             popupEditUserProfile.close();
         })
         .catch((err) => {
@@ -201,6 +199,17 @@ modalUpdateBtn.addEventListener('click', () => {
 function handleAvatarFormSubmit(data) {
     popupUpdatePhotoCard.renderLoading(true);
 
-    api
-
+    api.setUserAvatar(data)
+        .then((data) => {
+            avatar.src = data.avatar;
+            popupUpdatePhotoCard.close();
+        })
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            popupUpdatePhotoCard.renderLoading(false);
+        })
 }
+
+popupUpdatePhotoCard.setEventListeners();
