@@ -1,9 +1,16 @@
 export default class Card {
-    constructor({data, templateSelector, handleCardClick}) {
+    constructor({data, templateSelector, handleCardClick, userId, handleLike, handleDeletion}) {
+        this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
+        this._userId = userId;
+        this._cardId = data._id;
+        this._ownerId = data.owner._id;
+        this._likes = data.likes;
+        this._handleLike = handleLike;
+        this._handleDeletion = handleDeletion;
     }
 
     _getTemplate() {
@@ -24,21 +31,44 @@ export default class Card {
         this._photo.src = this._link;
         this._element.querySelector('.gallery__title').textContent = this._name;
 
+        this._likesNumber = this._element.querySelector('.gallery__like-counter');
         this._likeBtn = this._element.querySelector('.gallery__like-button');
         this._deleteBtn = this._element.querySelector('.gallery__delete-button');
 
         this._setListenersOnPhotoCard();
+        this._hasDeleteBtn();
+        this.setLikeCounter(this._likes);
 
         return this._element;
     }
 
-    _handleCardLike() {
-        this._likeBtn.classList.toggle('gallery__like-button_active');
+    _hasDeleteBtn() {
+        if (this._ownerId !== this._userId) {
+            this._deleteBtn.remove();
+        }
     }
 
-    _handleCardDelete() {
+    handleCardDelete() {
         this._element.remove();
         this._element = null;
+    }
+
+    isCardLiked() {
+        const likedCard = this._likes.some((user) => {
+            return user._id === this._userId
+        });
+        return likedCard;
+    }
+
+    setLikeCounter(newLikes) {
+        this._likes = newLikes;
+        this._likesNumber.textContent = this._likes.length;
+
+        if(this.isCardLiked()) {
+            this._likeBtn.classList.add('gallery__like-button_active');
+        } else {
+            this._likeBtn.classList.remove('gallery__like-button_active');
+        }
     }
 
     _setPhotoPopupListener() {
@@ -49,16 +79,13 @@ export default class Card {
 
     _setListenersOnPhotoCard() {
         this._likeBtn.addEventListener('click', () => {
-            this._handleCardLike();
+            this._handleLike(this._cardId);
         });
 
         this._deleteBtn.addEventListener('click', () => {
-            this._handleCardDelete();
+            this._handleDeletion(this._cardId);
         });
 
         this._setPhotoPopupListener();
     }
 }
-
-
-

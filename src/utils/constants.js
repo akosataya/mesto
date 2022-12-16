@@ -45,3 +45,9 @@ export const popupAdd = document.querySelector('.popup_add');
 export const popupAddForm = document.querySelector('.popup__add-form');
 
 export const popupArea = document.querySelector('.popup_place-photo');
+
+export const popupConfirm = document.querySelector('.popup_confirm');
+
+export const popupUpdateAvatar = document.querySelector('.popup_update');
+export const modalUpdateBtn = document.querySelector('.profile__pic-button');
+export const popupUpdateForm = document.querySelector('.popup__update-form');
