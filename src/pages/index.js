@@ -1,7 +1,6 @@
 import "./index.css";
 
 import {
-    // initialCards,
     validationConfig,
     popupAddForm,
     formElementEdit,
@@ -42,12 +41,12 @@ let userId;
 Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, cards]) => {
         userId = user._id;
-        userInfo.setUserInfo(user);
-        userInfo.setUserAvatar(user);
+        userInfo.setUserInfo(user.name, user.about);
+        userInfo.setUserAvatar(user.avatar);
 
         cardsSection.renderItems(cards);
     })
-    .catch((error) => console.log(error));
+    .catch((err) => console.log(err));
 
 /** Валидация */
 const profileFormValidator = new FormValidator(validationConfig, formElementEdit);
@@ -135,9 +134,9 @@ profileBtn.addEventListener('click', () => {
 function handleProfileFormSubmit(data) {
     popupEditUserProfile.renderLoading(true);
 
-    api.setNewUserInfo(data.name, data.about)
-        .then((name, about) => {
-            userInfo.setUserInfo(name, about);
+    api.setNewUserInfo(data)
+        .then((data) => {
+            userInfo.setUserInfo(data);
             popupEditUserProfile.close();
         })
         .catch((err) => {
@@ -163,7 +162,7 @@ modalAddBtn.addEventListener('click', () => {
 function handleCardFormSubmit(data) {
     popupAddUserPhotos.renderLoading(true);
 
-    api.addNewCard(data.placeName, data.placeLink)
+    api.addNewCard(data)
         .then((cardData) => {
             cardsSection.addItem(createCard(cardData));
             popupAddUserPhotos.close();
@@ -200,8 +199,8 @@ function handleAvatarFormSubmit(data) {
     popupUpdatePhotoCard.renderLoading(true);
 
     api.setUserAvatar(data)
-        .then((data) => {
-            avatar.src = data.avatar;
+        .then((avatar) => {
+            userInfo.setUserAvatar(avatar);
             popupUpdatePhotoCard.close();
         })
         .catch((err) => {
