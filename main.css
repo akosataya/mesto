@@ -8,9 +8,11 @@
 .profile__text{display:flex;flex-direction:column}@media screen and (max-width:1279px){.profile__text{align-items:center;max-width:282px}}
 .profile__name{font-size:42px;font-style:normal;font-weight:500;line-height:114%;margin:0 18px 0 0;max-width:294px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1279px){.profile__name{font-size:27px;margin:0 10px 0 26px;max-width:189px}}
 .profile__info{align-items:flex-end;display:flex}@media screen and (max-width:1279px){.profile__info{align-items:center}}
-.profile__avatar{border-radius:50%;height:120px;margin:0 30px 0 0;-o-object-fit:contain;object-fit:contain;width:120px}@media screen and (max-width:1279px){.profile__avatar{margin:0 0 26px}}
+.profile__pic{position:relative}
+.profile__pic-button{background:no-repeat 50% url(a086f758840ae814ecde.svg);border:none;border-radius:50%;cursor:pointer;height:121px;left:0;opacity:0;padding:0;position:absolute;top:0;width:121px}.profile__pic-button:hover{background-color:#000;opacity:.7}
+.profile__pic-avatar{border-radius:50%;height:120px;margin:0 30px 0 0;-o-object-fit:contain;object-fit:contain;width:120px}@media screen and (max-width:1279px){.profile__avatar{margin:0 0 26px}}
 .profile__edit-button{background-color:transparent;background-image:url(8667ac4a523e8fc42e59.svg);background-position:50%;background-repeat:no-repeat;background-size:10px 10px;border:1px solid #fff;box-sizing:border-box;cursor:pointer;height:24px;padding:0;transition:opacity .4s ease;width:24px}.profile__edit-button:hover{opacity:.6}@media screen and (max-width:1279px){.profile__edit-button{background-size:7.5px 7.5px;height:18px;width:18px}}
-.profile__data{align-items:center;display:flex;width:100%}@media screen and (max-width:1279px){.profile__data{flex-direction:column}}
+.profile__data{align-items:center;display:flex;width:100%}@media screen and (max-width:1279px){.profile__data{flex-direction:column;gap:25px}}
 .profile__add-button{background-color:transparent;background-image:url(d86bb2edc2f6eadb96b7.svg);background-position:50%;background-repeat:no-repeat;border:2px solid #fff;border-radius:2px;box-sizing:border-box;cursor:pointer;height:50px;padding:0;transition:opacity .4s ease;width:180px}.profile__add-button:hover{opacity:.6}@media screen and (max-width:1279px){.profile__add-button{background-size:16px 16px;margin:32px auto 0;width:282px}}
 .profile__about{font-size:18px;font-weight:400;line-height:22px;margin:16px 0 0;max-width:336px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1279px){.profile__about{font-size:14px;line-height:17px;margin-top:9px;max-width:282px}}
 .gallery{-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(3,6fr);justify-content:center;list-style:none;margin:0 auto;max-width:880px;padding:0;row-gap:20px;width:100%}@media screen and (max-width:1279px){.gallery{grid-template-columns:repeat(1,6fr);max-width:282px;row-gap:20px}}
@@ -18,8 +20,10 @@
 .gallery__photos{-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(3,6fr);justify-content:center;list-style:none;margin:0;padding:0;row-gap:20px;width:100%}@media screen and (max-width:1279px){.gallery__photos{grid-template-columns:repeat(1,6fr);row-gap:20px}}
 .gallery__item{background-color:#fff;border-radius:10px;display:flex;flex-direction:column;max-width:282px;min-height:361px;overflow:hidden;position:relative}
 .gallery__photo{cursor:pointer;height:282px;-o-object-fit:cover;object-fit:cover;vertical-align:bottom;width:100%}
+.gallery__like{text-align:center}
 .gallery__like-button{background-color:transparent;background-image:url(87ed371465c7a6a1cd01.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:0;cursor:pointer;height:19px;padding:0;transition:opacity .4s ease;width:22px}.gallery__like-button:hover{opacity:.5}
 .gallery__like-button_active{background-image:url(e787eeb70bb65b7b453a.svg)}
+.gallery__like-counter{color:#000;margin:3px 0 0}
 .gallery__description{align-items:center;box-sizing:border-box;display:flex;justify-content:space-between;padding:27px 20px 26px 21px}
 .gallery__delete-button{background-color:transparent;background-image:url(cbc09a894bdd4c956365.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;height:19px;padding:0;position:absolute;right:20px;top:20px;transition:opacity .4s ease;width:18px}.gallery__delete-button:hover{opacity:.6}
 .footer{margin:67px auto 60px;max-width:880px}@media screen and (max-width:1279px){.footer{margin:48px auto 36px;max-width:282px}}
