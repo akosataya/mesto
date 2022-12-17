@@ -42,7 +42,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, cards]) => {
         userId = user._id;
         userInfo.setUserInfo(user);
-        userInfo.setUserAvatarPhoto(user);
+        userInfo.setUserAvatar(user.avatar);
 
         cardsSection.renderItems(cards);
     })
@@ -163,8 +163,8 @@ function handleCardFormSubmit(data) {
     popupAddUserPhotos.renderLoading(true);
 
     api.addNewCard(data)
-        .then((cardData) => {
-            cardsSection.addItem(createCard(cardData));
+        .then((data) => {
+            cardsSection.addItem(createCard(data));
             popupAddUserPhotos.close();
         })
         .catch((err) => {
@@ -200,7 +200,7 @@ function handleAvatarFormSubmit(data) {
 
     api.setUserAvatar(data)
         .then((data) => {
-            userInfo.setUserAvatarPhoto(data);
+            userInfo.setUserAvatar(data.avatar);
             popupUpdatePhotoCard.close();
         })
         .catch((err) => {
